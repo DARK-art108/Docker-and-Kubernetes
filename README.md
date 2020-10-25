@@ -66,9 +66,36 @@ To remove the running container you can use:
 * Between host and container
 * Between containers
 
-`docker run --name website -v $(pwd):/usr/share/nginx/html:ro -d -p 8080:80 nginx` or `docker run --name website -v ${pwd}:/usr/share/nginx/html:ro -d -p 8080:80 nginx`
+`docker run --name website -v ${pwd}:/usr/share/nginx/html:ro -d -p 8080:80 nginx`
 
 -v : volume
+
+### Volume between Container
+
+`docker run --name website-copy --volume-from website -d -p 8081:80 nginx`
+
+Note: website-copy and website are name of Containers
+
+### Dockerfile
+
+```
+FROM python:3.7-buster
+COPY . /app
+EXPOSE 5000
+WORKDIR /app
+RUN pip install -r requirements.txt
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000"]
+```
+
+Build your Docker Image Using:
+
+`docker build --tag website:latest .`
+
+This file is the copy of one of my ml project this is the way we create a dockerfile, dockerfile allow us to run all docker commands in one go.
+
+
+
+
  
 
 
