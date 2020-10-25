@@ -1,2 +1,88 @@
-# Docker-and-Kubernetes
-Commands ans Tricks over Docker and Kubernetes
+# Docker and Kubernetes
+
+<p align="center">
+  <img src="utils/doc.gif">
+</p>
+
+## **What is Docker?**
+
+* Docker is a tool for running applications in an isolated Enviroment.
+* Similar to Virtual Machine
+* App run in same enviroment
+* Standard for Software Deployment.
+
+### ⬇️ Install a specific Images.
+
+I am using Nginx but you can choose any there are multiple options like alpine,mongo and many more.
+
+`docker run --name nginx -d nginx` or `docker run postgres:9.6` or `docker run nginx:latest`
+
+-d : detach mode
+
+### 🏃‍♂️ Run Docker Container
+
+`docker container run --publish 80:80 --detach --name webhost nginx`
+
+or 
+
+Exposing One Container to Different Ports 🔌:
+
+`docker container run -d -p 8080:80 -p 3000:80 nginx:latest`
+
+### 📝 List all Docker Containers
+
+`docker container ls -a` or `docker container ps -a`
+
+### ✔️ Checks logs
+
+`docker container logs webhost`
+
+### ✔️ Check Inner Docker Working
+
+`docker container top webhost`
+
+### 🔨 Remove Docker Container
+
+`docker container rm [Container_Id]` or `docker rm $(docker ps -aq)`
+
+**Note:** You can specify multiple Container Id to remove multiple Container but you cannot remove a running container due to safety measures.
+
+Container ID looks like : 08gf345hjkmn but you can specify only first three letters of container to remove or to do various operations.
+
+`docker container rm 06e 9fd`
+
+To remove the running container you can use: 
+
+`docker container rm -f 06fe`
+
+
+## Docker: Volumes
+
+<p align="center">
+  <img src="utils/vol.png">
+</p>
+
+* Allow Sharing of Data,Files and Folder
+* Between host and container
+* Between containers
+
+`docker run --name website -v $(pwd):/usr/share/nginx/html:ro -d -p 8080:80 nginx` or `docker run --name website -v ${pwd}:/usr/share/nginx/html:ro -d -p 8080:80 nginx`
+
+-v : volume
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
